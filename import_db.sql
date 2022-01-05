@@ -3,7 +3,7 @@ PRAGMA foreign_keys = ON;
 CREATE TABLE users (
   id INTEGER PRIMARY KEY,
   fname TEXT NOT NULL,
-  lname TEXT NOT NULL,
+  lname TEXT NOT NULL
 );
 
 CREATE TABLE questions (
@@ -68,7 +68,7 @@ VALUES
     FROM  
       questions
     WHERE
-      fname = "Sean"
+      users_id = 1
   ), NULL, (
     SELECT
       users.id
