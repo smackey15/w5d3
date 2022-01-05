@@ -18,8 +18,18 @@ class Question
     data.map { |datum| Question.new(datum) }
   end
 
-  def self.find_by_id
-
+  def self.find_by_id(id)
+    question = QuestionsDatabase.instance.execute(<<-SQL, id)
+        SELECT
+            *
+        FROM
+            questions
+        WHERE
+            id = ?
+    SQL
+    return nil if question.length == 0
+    
+    Question.new(question.first)
   end
 
   def initialize(options)
