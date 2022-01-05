@@ -84,3 +84,17 @@ VALUES
       fname = "Evan"
   ), "The difference between LIFO and FIFO is that LIFO is last in first out and FIFO is first in first out."
   );
+
+  INSERT INTO
+    question_follows (users_id, questions_id)
+  VALUES
+    ((SELECT id FROM users WHERE fname = 'Ben' AND lname = 'Lim'),
+    (SELECT id FROM questions WHERE id = 1)
+    );
+
+  INSERT INTO
+    question_likes (users_id, questions_id)
+  VALUES
+    ((SELECT id FROM users WHERE fname = 'Ben' AND lname = 'Lim'),
+    (SELECT id FROM questions WHERE id = 1)
+    );

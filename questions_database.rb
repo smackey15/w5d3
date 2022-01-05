@@ -37,7 +37,7 @@ class Question
     @id = options['id']
     @title = options['title']
     @body = options['body']
-    @users_id = options['user_id']
+    @users_id = options['users_id']
   end
 end
 
@@ -103,11 +103,25 @@ end
 class QuestionFollow
     
     def self.all
-        QuestionsDatabase.instance.execute("SELECT * FROM question_follows")
-        data.map { |datum| QuestionFollow.new(datum) }
+      data = QuestionsDatabase.instance.execute("SELECT * FROM question_follows")
+      data.map { |datum| QuestionFollow.new(datum) }
     end
 
-    def initialize()
+    def initialize(options)
+      @id = options['id']
+      @users_id = options['users_id']
+      @questions_id = options['questions_id']
+    end
 
+    def self.follow_count(question_id)
+      QuestionsDatabase.instance.execute(<<-SQL, question_id)
+        SELECT
+          SUM(questions_id)
+        FROM
+          question_follows
+        WHERE
+          questions_id = ?
+        SQL
+        
     end
 end
