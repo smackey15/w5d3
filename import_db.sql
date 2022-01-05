@@ -57,5 +57,24 @@ INSERT INTO
     questions (title, body, users_id)
 VALUES
     ('Data Types', 'What is the difference between LIFO & FIFO', (SELECT id FROM users WHERE fname = 'Sean'  AND lname = 'Mackey'),
-    ('SQL', 'Why do we need line PRAGMA foreign_keys = ON to make sure we reference a table when the code can only work when it does reference a table', (SELECT id FROM users WHERE fname = 'Ben'  AND lname = 'Lim')
-    
+    ('SQL', 'Why do we need line PRAGMA foreign_keys = ON to make sure we reference a table when the code can only work when it does reference a table', (SELECT id FROM users WHERE fname = 'Ben'  AND lname = 'Lim');
+
+INSERT INTO
+  replies (questions_id, reply_id, users_id, body)
+VALUES
+  ((
+    SELECT
+      questions.id
+    FROM  
+      questions
+    WHERE
+      fname = "Sean"
+  ), NULL, (
+    SELECT
+      users.id
+    FROM
+      users
+    WHERE
+      fname = "Evan"
+  ), "The difference between LIFO and FIFO is that LIFO is last in first out and FIFO is first in first out."
+  );
