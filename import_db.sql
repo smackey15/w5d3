@@ -44,3 +44,18 @@ CREATE TABLE question_likes (
   FOREIGN KEY (questions_id) REFERENCES questions(id)
   FOREIGN KEY (users_id) REFERENCES users(id)
 );
+
+INSERT INTO
+    users (fname, lname)
+VALUES
+    ('Ben', 'Lim'),
+    ('Sean', 'Mackey'),
+    ('Kirby', 'Neaton'),
+    ('Evan', 'Leon');
+
+INSERT INTO
+    questions (title, body, users_id)
+VALUES
+    ('Data Types', 'What is the difference between LIFO & FIFO', (SELECT id FROM users WHERE fname = 'Sean'  AND lname = 'Mackey'),
+    ('SQL', 'Why do we need line PRAGMA foreign_keys = ON to make sure we reference a table when the code can only work when it does reference a table', (SELECT id FROM users WHERE fname = 'Ben'  AND lname = 'Lim')
+    
