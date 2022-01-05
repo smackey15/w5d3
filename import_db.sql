@@ -1,14 +1,20 @@
 PRAGMA foreign_keys = ON;
 
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS questions;
+DROP TABLE IF EXISTS question_likes;
+DROP TABLE IF EXISTS question_follows;
+DROP TABLE IF EXISTS replies;
+
 CREATE TABLE users (
   id INTEGER PRIMARY KEY,
   fname TEXT NOT NULL,
   lname TEXT NOT NULL
-);
+); 
 
 CREATE TABLE questions (
   id INTEGER PRIMARY KEY,
-  title TEXT NOT NULL,
+  title VARCHAR(50) NOT NULL,
   body TEXT NOT NULL,
   users_id INTEGER NOT NULL,
 
@@ -56,8 +62,8 @@ VALUES
 INSERT INTO
     questions (title, body, users_id)
 VALUES
-    ('Data Types', 'What is the difference between LIFO & FIFO', (SELECT id FROM users WHERE fname = 'Sean'  AND lname = 'Mackey'),
-    ('SQL', 'Why do we need line PRAGMA foreign_keys = ON to make sure we reference a table when the code can only work when it does reference a table', (SELECT id FROM users WHERE fname = 'Ben'  AND lname = 'Lim');
+    ('Data Types', 'What is the difference between LIFO & FIFO', (SELECT id FROM users WHERE fname = 'Sean' AND lname = 'Mackey')),
+    ('SQL', 'Why do we need line PRAGMA foreign_keys = ON to make sure we reference a table when the code can only work when it does reference a table', (SELECT id FROM users WHERE fname = 'Ben'  AND lname = 'Lim'));
 
 INSERT INTO
   replies (questions_id, reply_id, users_id, body)
