@@ -12,6 +12,7 @@ class QuestionsDatabase < SQLite3::Database
 end
 
 class Question 
+    attr_accessor :id, :title, :body, :users_id
 
   def self.all
     data = QuestionsDatabase.instance.execute("SELECT * FROM questions")
@@ -41,6 +42,7 @@ class Question
 end
 
 class User 
+    attr_accessor :id, :fname, :lname
 
   def self.all
     users = QuestionsDatabase.instance.execute("SELECT * FROM users")
@@ -68,7 +70,8 @@ class User
 end
 
 class Reply
-  
+    attr_accessor :id, :questions_id, :replies_id, :users_id, :body
+
   def self.all
     data = QuestionsDatabase.instance.execute("SELECT * FROM replies")
     data.map { |datum| Reply.new(datum) }
@@ -90,10 +93,21 @@ class Reply
 
   def initialize(options)
     @id = options['id']
-    @title = options['title']
-    @body = options['body']
+    @questions_id = options['questions_id']
+    @replies_id = options['replies_id']
     @users_id = options['user_id']
+    @body = options['body']
   end
+end
 
+class QuestionFollow
+    
+    def self.all
+        QuestionsDatabase.instance.execute("SELECT * FROM question_follows")
+        data.map { |datum| QuestionFollow.new(datum) }
+    end
 
+    def initialize()
+
+    end
 end
